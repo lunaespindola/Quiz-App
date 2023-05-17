@@ -19,10 +19,19 @@ function App() {
 
   return (
     <div>
-      <h1>Messages</h1>
-      {data.message.map((item, index) => (
-        <p key={index}>{item}</p>
-      ))}
+      {typeof data.message === 'undefined' ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <h1>Messages</h1>
+          <ul>
+            {data.message.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
     </div>
   );
 }
