@@ -1,14 +1,18 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function App() {
   
   const [data, setData] = useState([]);
+  const [message, setMessage] = useState([]);
 
   useEffect(() => {
-    fetch("/message")
+    axios.get('http://localhost:5000/message')
     .then( 
-      response => response.json())
+      response => {
+        console.log(response)
+        return response.data
+      })
     .then( 
       data => {
         setData(data)
@@ -16,6 +20,22 @@ function App() {
       });
   }, []
   );
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/message/0')
+    .then(
+      response => {
+        console.log(response)
+        return response.data
+      })
+    .then(
+      data => {
+        setMessage(data)
+        console.log(data)
+      });
+  }, []
+  );
+
 
   return (
     <div>
@@ -30,6 +50,20 @@ function App() {
             ))}
           </ul>
         </div>
+      )}
+
+
+      {typeof message.message === 'undefined' ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <h1>Message</h1>
+          <ul>
+            {message.message.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+          </div>
       )}
 
     </div>
