@@ -1,38 +1,41 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function App() {
   
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch("/message")
-    .then( 
-      response => response.json())
-    .then( 
-      data => {
-        setData(data)
-        console.log(data)
-      });
-  }, []
+  const [QuestionID, setQuestionID] = useState({
+    id: 0}
   );
 
-  return (
-    <div>
-      {typeof data.message === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h1>Messages</h1>
-          <ul>
-            {data.message.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+function handle(e){
+  const newdata={...QuestionID}
+  newdata[e.target.id] = e.target.value
+  setQuestionID(newdata)
+}
 
-    </div>
+function submit(e){
+  e.preventDefault()
+  axios.post('http://localhost:5000/question', {
+    id: QuestionID.id
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
+  return (
+    <div className="App">
+      <h1>Question</h1>
+      <form onSubmit={(e)=> submit(e)}>
+        <input onChange={(e)=>handle(e)} id="id" value={QuestionID.id} type="text" placeholder="id" />
+        <button>Get Question</button>
+      </form>
+      </div>
   );
 }
 
