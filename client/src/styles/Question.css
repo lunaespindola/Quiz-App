@@ -1,0 +1,6 @@
+.Content h1{
+    border-radius: 10px; /* Redondea los bordes de la pregunta */
+    padding: 10px; /* Añade un espacio interno para mayor claridad */
+    background-color: white;
+    text-align: center;
+}

@@ -1,37 +1,17 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import './App.css';
+import NavBar from './components/NavBar';
+import AppRouter from './router/AppRouter';
 
 function App() {
-  
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("/message")
-    .then( 
-      response => response.json())
-    .then( 
-      data => {
-        setData(data)
-        console.log(data)
-      });
-  }, []
-  );
-
   return (
-    <div>
-      {typeof data.message === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h1>Messages</h1>
-          <ul>
-            {data.message.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
+    <div className="App">
+      <div className="App-header">
+        <NavBar />
+      </div>
+      <div className="App-content">
+        <AppRouter />
+      </div>
     </div>
   );
 }

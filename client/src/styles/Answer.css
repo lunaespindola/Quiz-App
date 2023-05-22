@@ -1,0 +1,36 @@
+.Answers{
+    list-style-type: none;
+    padding: 0;
+}
+.Answers li{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px; 
+    background-color: #0C0A90;
+    color: #fff;
+    text-align: center;
+
+}
+.Answers li:hover{
+    cursor: pointer;
+    background-color: #a2a2a2;
+}
+.Answers .correct,
+.Answers .correct:hover {
+    background-color: #049949;
+    color: #fff;
+}
+
+.Answers .incorrect,
+.Answers .incorrect:hover {
+    background-color: #e43008;
+    color: #fff;
+}
+
+.Answers[disabled]{
+    pointer-events: none;
+    opacity: 0.7;
+
+}
+
