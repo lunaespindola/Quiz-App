@@ -3,70 +3,39 @@ import axios from 'axios';
 
 function App() {
   
-  const [data, setData] = useState([]);
-  const [message, setMessage] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/message')
-    .then( 
-      response => {
-        console.log(response)
-        return response.data
-      })
-    .then( 
-      data => {
-        setData(data)
-        console.log(data)
-      });
-  }, []
+  const [QuestionID, setQuestionID] = useState({
+    id: 0}
   );
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/message/0')
-    .then(
-      response => {
-        console.log(response)
-        return response.data
-      })
-    .then(
-      data => {
-        setMessage(data)
-        console.log(data)
-      });
-  }, []
-  );
+function handle(e){
+  const newdata={...QuestionID}
+  newdata[e.target.id] = e.target.value
+  setQuestionID(newdata)
+}
+
+function submit(e){
+  e.preventDefault()
+  axios.post('http://localhost:5000/question', {
+    id: QuestionID.id
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
 
   return (
-    <div>
-      {typeof data.message === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h1>Messages</h1>
-          <ul>
-            {data.message.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-
-      {typeof message.message === 'undefined' ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h1>Message</h1>
-          <ul>
-            {message.message.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-          </div>
-      )}
-
-    </div>
+    <div className="App">
+      <h1>Question</h1>
+      <form onSubmit={(e)=> submit(e)}>
+        <input onChange={(e)=>handle(e)} id="id" value={QuestionID.id} type="text" placeholder="id" />
+        <button>Get Question</button>
+      </form>
+      </div>
   );
 }
 
