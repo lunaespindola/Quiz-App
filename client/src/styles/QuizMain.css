@@ -1,0 +1,29 @@
+.NextStep{
+    background-color: #140a9e;
+    color: white;
+    border-radius: 10px; 
+    padding: 10px 60px; 
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.NextStep:hover{
+    background-color: rgb(33, 122, 224);
+}
+.NextStep[disabled]{
+    display: none;
+}
+
+.finalPage{
+    text-align: center;
+}
+.finalPage h1{
+    text-align: center;
+    margin: 15px 0;
+    font-size: 25px;
+    font-family: Arial,sans-serif;
+    font-weight: bold;
+    color: #008416;
+    text-transform: none;
+    text-shadow: none;
+}
