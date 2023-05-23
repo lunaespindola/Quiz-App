@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+
 function App() {
   
+  const [Question, setQuestion] = useState("");
 
   const [QuestionID, setQuestionID] = useState({
     id: 0}
@@ -20,7 +22,8 @@ function submit(e){
     id: QuestionID.id
   })
   .then(function (response) {
-    console.log(response);
+    setQuestion(response.data)
+    console.log(response.data);
   })
   .catch(function (error) {
     console.log(error);
@@ -33,6 +36,8 @@ function submit(e){
       <h1>Question</h1>
       <form onSubmit={(e)=> submit(e)}>
         <input onChange={(e)=>handle(e)} id="id" value={QuestionID.id} type="text" placeholder="id" />
+        <h1>Question</h1>
+        <h1>{Question}</h1>
         <button>Get Question</button>
       </form>
       </div>

@@ -16,10 +16,10 @@ def question():
         print(f'ID = {request.json["id"]}')
         id = int(request.json['id'])
         questionJSON = getQuestion(id)
-        print(questionJSON)
-        return Response("200")
+        question = questionJSON['Question']
+        print(f'PREGUNTA = {question}')
+        return jsonify(question)
         
-        
-
+    
 if __name__ == '__main__':
     app.run(debug=True)
