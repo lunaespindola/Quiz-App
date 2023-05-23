@@ -16,6 +16,7 @@ def question():
         print(f'ID = {request.json["id"]}')
         id = int(request.json['id'])
         questionJSON = getQuestion(id)
+        print(questionJSON)
         return Response("200")
         
         

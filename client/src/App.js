@@ -1,18 +1,41 @@
-import React from 'react';
-import './App.css';
-import NavBar from './components/NavBar';
-import AppRouter from './router/AppRouter';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function App() {
+  
+
+  const [QuestionID, setQuestionID] = useState({
+    id: 0}
+  );
+
+function handle(e){
+  const newdata={...QuestionID}
+  newdata[e.target.id] = e.target.value
+  setQuestionID(newdata)
+}
+
+function submit(e){
+  e.preventDefault()
+  axios.post('http://localhost:5000/question', {
+    id: QuestionID.id
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
   return (
     <div className="App">
-      <div className="App-header">
-        <NavBar />
+      <h1>Question</h1>
+      <form onSubmit={(e)=> submit(e)}>
+        <input onChange={(e)=>handle(e)} id="id" value={QuestionID.id} type="text" placeholder="id" />
+        <button>Get Question</button>
+      </form>
       </div>
-      <div className="App-content">
-        <AppRouter />
-      </div>
-    </div>
   );
 }
 
