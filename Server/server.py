@@ -14,11 +14,8 @@ def question():
     if request.method == 'POST':
         print(f'RESPUESTA = {request.json}')
         print(f'ID = {request.json["id"]}')
-        id = str(request.json['id'])
-        id = int(id)
-        print(f'TYPE = {type(id)}')
+        id = int(request.json['id'])
         questionJSON = getQuestion(id)
-        print(f'QUESTION = {questionJSON}')
         return Response("200")
         
         
