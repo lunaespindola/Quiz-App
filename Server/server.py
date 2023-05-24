@@ -1,3 +1,10 @@
+"""
+    @Author: AlanGallegosEsp
+    @Author: PauAM10
+    @Date: 5/23/2023
+    @last update: 5/23/2023 10:24 PM
+"""
+
 from flask import Flask
 from flask_cors import CORS
 from mongoController import getQuestion, createUser
