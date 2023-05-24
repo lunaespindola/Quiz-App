@@ -49,6 +49,8 @@ export default class Quiz extends Component {
     score: 0,
   };
 
+  
+
   checkAnswer = (answer) => {
     const { correctAnswers, step, score } = this.state;
     const correctAnswer = correctAnswers[step];

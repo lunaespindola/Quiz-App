@@ -10,10 +10,13 @@ client = MongoClient(uri,
                      server_api=ServerApi('1'))
 
 db = client['Quiz-App']
-collection = db['Questions']
-doc_count = collection.count_documents({})
-doc = collection.find_one({"id": 1})
-
+q_collection = db['Questions']
+u_collection = db['Users']
 
 def getQuestion(question_id):
-    return collection.find_one({"id": question_id})
+    filter={'id': question_id}
+    project={'_id': 0}
+    return q_collection.find_one(filter, project)
+
+def createUser(user):
+    return u_collection.insert_one(user)

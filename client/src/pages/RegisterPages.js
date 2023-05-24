@@ -1,8 +1,11 @@
+// Libs
 import React from "react";
 import { useForm } from "../hook/userForm";
-
-import '../styles/Register.css';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+// Styles
+import '../styles/Register.css';
 
 const RegisterPages = () => {
 
@@ -19,7 +22,18 @@ const RegisterPages = () => {
 
     const onRegister = (e) => {
         e.preventDefault();
-        console.log('Register');
+        axios.post('http://localhost:5000/api/users', {
+            name,
+            numQuestions,
+    })
+        axios.post('http://localhost:5000/api/getQuestions', {
+            numQuestions
+    })
+    .then((response) => {
+        console.log(response.data);
+    }, (error) => {
+        console.log(error);
+    });
         navigate('/quiz', {
                 replace: true, 
                 sate: {
