@@ -31,9 +31,13 @@ def getQuestions():
     numQuestions = int(request.json['numQuestions']) 
     randomList = random.sample(range(1, 3), numQuestions)
     questions = []
-    for i in range(1,randomList+1):
-        questions.append(getQuestion(i))
-    return jsonify(questions)
+    if numQuestions ==  1:
+        questions.append(getQuestion(1))
+        return jsonify(questions)
+    else:
+        for i in range(1,randomList+1):
+            questions.append(getQuestion(i))
+        return jsonify(questions)
 
 @app.route('/api/users', methods=['POST'])
 def create_user():
