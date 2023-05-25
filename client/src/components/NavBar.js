@@ -1,23 +1,34 @@
 import React from "react";
-import '../styles/NavBar.css'
-import {Link} from "react-router-dom";
+import "../styles/NavBar.css";
+import { Button, Navbar } from "flowbite-react";
 
-
-
-const Navbar = () => {
-
-
+const NavbarComponent = () => {
   return (
-    
-    <nav className="navbar">
-      <h1 className="navbar__logo">Quiz App</h1>
-      <ul className="navbar__menu">
-        <Link className="navbar__item" to="/">Home</Link>
-        <Link className="navbar__item" to="/scores">Scores</Link>
-        <Link className="navbar__item" to="/register">Register</Link>
-      </ul>
-    </nav>
+    <Navbar fluid={true} rounded={true}>
+      <Navbar.Brand href="https://flowbite.com/">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          className="mr-3 h-6 sm:h-9"
+          alt="Flowbite Logo"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite
+        </span>
+      </Navbar.Brand>
+      <div className="flex md:order-2">
+        <Button>Get started</Button>
+        <Navbar.Toggle />
+      </div>
+      <Navbar.Collapse>
+        <Navbar.Link href="/" active={true}>
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="/register">Register</Navbar.Link>
+        <Navbar.Link href="/scores">Scores</Navbar.Link>
+        <Navbar.Link href="/quiz">Quiz</Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default NavbarComponent;

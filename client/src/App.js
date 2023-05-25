@@ -6,9 +6,7 @@ import AppRouter from './router/AppRouter';
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
         <NavBar />
-      </div>
       <div className="App-content">
         <AppRouter />
       </div>

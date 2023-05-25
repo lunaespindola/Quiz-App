@@ -1,30 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Scores.css";
+import { Table } from "flowbite-react";
 
-const ScoresPage = () => {
-  const scores = [
-    { name: "John", score: 80 },
-    { name: "Jane", score: 95 },
-    { name: "Mike", score: 70 },
-  ];
+const ScoresPages = () => {
+  const [users, setUsers] = useState([
+    {
+      username: "PatoAMLO",
+      score: "2",
+      date: "2021-05-01",
+    },
+    {
+      username: "Vegetta777",
+      score: "5",
+      date: "2021-05-03",
+    },
+    {
+      username: "RubiusOMG",
+      score: "3",
+      date: "2021-05-10",
+    },
+  ]);
 
-  // Ordenar los scores en orden descendente
-  const sortedScores = scores.sort((a, b) => b.score - a.score);
+  useEffect(() => {
+    const sortedScores = [...users].sort((a, b) => b.score - a.score);
+    setUsers(sortedScores);
+  }, [users]);
 
   return (
-    <div className="scores-page">
-      <h1 className="scores-page__title">Scores</h1>
-      <ul className="scores-page__list">
-        {sortedScores.map((score, index) => (
-          <li key={index} className="scores-page__item">
-            <span className="scores-page__position">{index + 1}.</span> {/* Agregar la posición del score */}
-            <span className="scores-page__name">{score.name}</span>
-            <span className="scores-page__score">{score.score}</span>
-          </li>
+    <Table hoverable={true}>
+      <Table.Head>
+        <Table.HeadCell>Number</Table.HeadCell>
+        <Table.HeadCell>Username</Table.HeadCell>
+        <Table.HeadCell>Score</Table.HeadCell>
+        <Table.HeadCell>Date</Table.HeadCell>
+      </Table.Head>
+      <Table.Body className="divide-y">
+        {users.map((user, index) => (
+          <Table.Row
+            key={index}
+            className="bg-white dark:border-gray-700 dark:bg-gray-800"
+          >
+            <Table.Cell>{index + 1}</Table.Cell>
+            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+              {user.username}
+            </Table.Cell>
+            <Table.Cell>{user.score}</Table.Cell>
+            <Table.Cell>{user.date}</Table.Cell>
+          </Table.Row>
         ))}
-      </ul>
-    </div>
+      </Table.Body>
+    </Table>
   );
 };
 
-export default ScoresPage;
+export default ScoresPages;
