@@ -89,8 +89,8 @@ export default class Quiz extends Component {
           <>
             <Question question={questions[step]} />
             <Answer
-              answer={options[step]}
-              correctAnswer={Answers}
+              answer={options[step]} 
+              correctAnswer={Answers[step]}
               clickedAnswer={clickedAnswer}
               checkAnswer={this.checkAnswer}
             />            <button
@@ -100,6 +100,7 @@ export default class Quiz extends Component {
             >
               Next
             </button>
+
           </>
         ) : (
           <div className="finalPage">

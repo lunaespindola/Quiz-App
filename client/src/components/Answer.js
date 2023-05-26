@@ -2,10 +2,10 @@ import React from "react";
 import "../styles/Answer.css";
 
 const Answer = (props) => {
-  let answer = Object.keys(props.answer).map((qAnswer, i) => (
+  let answer = Object.keys(props.answer).map((qAnswer) => (
     <li
       className={
-        props.correctAnswer === qAnswer
+        props.correctAnswer ===
           ? "correct"
           : props.clickedAnswer === qAnswer
           ? "incorrect"
