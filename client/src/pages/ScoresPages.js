@@ -1,38 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Scores.css";
 import { Table } from "flowbite-react";
+import axios from "axios";
 
 const ScoresPages = () => {
-  const [users, setUsers] = useState([
-    {
-      username: "PatoAMLO",
-      score: "2",
-      date: "2021-05-01",
-    },
-    {
-      username: "Vegetta777",
-      score: "5",
-      date: "2021-05-03",
-    },
-    {
-      username: "RubiusOMG",
-      score: "3",
-      date: "2021-05-10",
-    },
-  ]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const sortedScores = [...users].sort((a, b) => b.score - a.score);
-    setUsers(sortedScores);
-  }, [users]);
+    axios.get("http://localhost:5000/api/scores").then(
+      (response) => {
+        console.log("ESTO: ", response.data);
+        setUsers(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
+
 
   return (
-    <Table hoverable={true}>
+    <div className="Score-Pages">
+      <Table hoverable={true}>
       <Table.Head>
         <Table.HeadCell>Number</Table.HeadCell>
         <Table.HeadCell>Username</Table.HeadCell>
         <Table.HeadCell>Score</Table.HeadCell>
-        <Table.HeadCell>Date</Table.HeadCell>
+
       </Table.Head>
       <Table.Body className="divide-y">
         {users.map((user, index) => (
@@ -42,14 +37,16 @@ const ScoresPages = () => {
           >
             <Table.Cell>{index + 1}</Table.Cell>
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-              {user.username}
+              {user.Username}
             </Table.Cell>
-            <Table.Cell>{user.score}</Table.Cell>
-            <Table.Cell>{user.date}</Table.Cell>
+            <Table.Cell>{user.Score}</Table.Cell>
+
           </Table.Row>
         ))}
       </Table.Body>
     </Table>
+    </div>
+
   );
 };
 

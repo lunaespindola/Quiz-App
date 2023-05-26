@@ -1,5 +1,5 @@
 // Libs
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "../hook/userForm";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,11 +15,9 @@ import "../styles/Register.css";
 const RegisterPages = () => {
   const navigate = useNavigate();
 
-  const { username, email, password, numQuestions, onInputChange, onResetForm } =
+  const { username, numQuestions, onInputChange, onResetForm } =
     useForm({
       username: "",
-      email: "",
-      password: "",
       numQuestions: "",
     });
 
@@ -30,34 +28,29 @@ const RegisterPages = () => {
       numQuestions,
     }).then
     ((response) => {
-      console.log(response.status)
+      if (response.data === "User already exists") {
+        alert("User already exists");
+        return
+      }
+        else {
+          localStorage.setItem("username", username);
+          localStorage.setItem("numQuestions", numQuestions);
+        }
+        navigate("/quiz", {
+          replace: true,
+          sate: {
+            logged: true,
+            username,
+            numQuestions,
+          },
+        });
+
       },
       (error) => {
         console.log(error);
       }
     );
-    axios.post("http://localhost:5000/api/getQuestions", {
-        numQuestions,
-      })
-      .then(
-        (response) => {
-          console.log(response)
 
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    navigate("/quiz", {
-      replace: true,
-      sate: {
-        logged: true,
-        username,
-        email,
-        password,
-        numQuestions,
-      },
-    });
     onResetForm();
   };
 
@@ -66,7 +59,7 @@ const RegisterPages = () => {
     <form onSubmit={onRegister} className="flex flex-col gap-4">
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="username" value="Your Name" />
+          <Label htmlFor="username" value="Username" />
         </div>
         <TextInput
           type="text"
@@ -77,30 +70,6 @@ const RegisterPages = () => {
           required
           autoComplete="off"
         />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email" value="Your Email" />
-        </div>
-        <TextInput type="text"
-            name="email"
-            id="email"
-            value={email}
-            onChange={onInputChange}
-            required
-            autoComplete="off"/>
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password" value="You Password" />
-        </div>
-        <TextInput type="password"
-            name="password"
-            id="password"
-            value={password}
-            onChange={onInputChange}
-            required
-            autoComplete="off"/>
       </div>
       <div>
         <div className="mb-2 block">

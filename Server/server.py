@@ -7,7 +7,7 @@
 
 from flask import Flask
 from flask_cors import CORS
-from mongoController import getQuestion, createUser, verifyUser
+from mongoController import getQuestion, createUser, verifyUser, getTopScores
 from flask import request
 from flask import jsonify
 from flask import Response
@@ -45,16 +45,18 @@ def create_user():
     res = verifyUser(user["Username"])
     if res == None:
         createUser(user)
-        print("User created")
         return "User created", 201
     else:
-        print("User already exists")
-        return "User already exists", 409
-
-    #createUser(user)
-
+        return "User already exists" 
     
-        
+@app.route('/api/scores', methods=['GET'])
+def get_scores():
+    scores = list(getTopScores())
+    print(scores)
+    print("IM HERE")
+    return jsonify(scores)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
