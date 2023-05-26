@@ -20,3 +20,8 @@ def getQuestion(question_id):
 
 def createUser(user):
     return u_collection.insert_one(user)
+
+def verifyUser(user):
+    filter={'Username': user}
+    project={'_id': 0}
+    return u_collection.find_one(filter, project)

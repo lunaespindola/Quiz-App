@@ -15,9 +15,9 @@ import "../styles/Register.css";
 const RegisterPages = () => {
   const navigate = useNavigate();
 
-  const { name, email, password, numQuestions, onInputChange, onResetForm } =
+  const { username, email, password, numQuestions, onInputChange, onResetForm } =
     useForm({
-      name: "",
+      username: "",
       email: "",
       password: "",
       numQuestions: "",
@@ -26,16 +26,23 @@ const RegisterPages = () => {
   const onRegister = (e) => {
     e.preventDefault();
     axios.post("http://localhost:5000/api/users", {
-      name,
+      username,
       numQuestions,
-    });
-    axios
-      .post("http://localhost:5000/api/getQuestions", {
+    }).then
+    ((response) => {
+      console.log(response.status)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    axios.post("http://localhost:5000/api/getQuestions", {
         numQuestions,
       })
       .then(
         (response) => {
-          console.log(response.data);
+          console.log(response)
+
         },
         (error) => {
           console.log(error);
@@ -45,7 +52,7 @@ const RegisterPages = () => {
       replace: true,
       sate: {
         logged: true,
-        name,
+        username,
         email,
         password,
         numQuestions,
@@ -55,16 +62,17 @@ const RegisterPages = () => {
   };
 
   return (
+    <div className="Register-Page">
     <form onSubmit={onRegister} className="flex flex-col gap-4">
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="name" value="Your Name" />
+          <Label htmlFor="username" value="Your Name" />
         </div>
         <TextInput
           type="text"
-          name="name"
-          id="name"
-          value={name}
+          name="username"
+          id="username"
+          value={username}
           onChange={onInputChange}
           required
           autoComplete="off"
@@ -108,6 +116,7 @@ const RegisterPages = () => {
       </div>
       <Button type="submit">Submit</Button>
     </form>
+    </div>
   );
 };
 
