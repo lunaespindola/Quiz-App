@@ -3,9 +3,11 @@ import '../styles/Question.css'
 
 const Question = (props) => {
     return (
-        <h1>
+        <div className="Question-Container">
+                    <h1>
             {props.question}
         </h1>
+        </div>
     )
 }
 

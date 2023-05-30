@@ -32,4 +32,7 @@ def verifyUser(user):
 
 
 def getTopScores():
-    return s_collection.aggregate([{'$sort': {'Score': -1}}, {'$project': {'_id': 0}}, {'$limit': 5}])
+    return s_collection.aggregate([{'$sort': {'Score': -1}}, {'$project': {'_id': 0}}, {'$limit': 10}])
+
+def addScore(score):
+    return s_collection.insert_one(score)

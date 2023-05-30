@@ -1,23 +1,37 @@
 import React from "react";
-import '../styles/HomePages.css'
+import "../styles/HomePages.css";
 import { useNavigate } from "react-router-dom";
+import { Card, Button } from "flowbite-react";
+import logo from '../images/Quizzy.png'
 
 const HomePage = () => {
-    const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-    const handleNavigate = () => {
-        navigate("/register"); // Navega a la página de registro al presionar el botón
-    }
+  const handleNavigate = () => {
+    navigate("/register");
+  };
 
-    return (
-        <div className="home-page">
-            <h1 className="home-page__title">Welcome to the Quiz App!</h1>
-            <p className="home-page__description">Test your knowledge and have fun!</p>
-            <button className="home-page__start-button" onClick={handleNavigate}>Start Quiz</button>
+  return (
+    <div className="full-page"> 
+      <Card
+        horizontal
+        imgSrc={logo}
+        alt="Quizzy Logo"
+        style={{ width: "1000px", height: "500px" }}
+      >
+        <div className="text">
+        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <p>Welcome to the Quizzy App!</p>
+        </h5>
+        <p className="font-normal text-gray-700 dark:text-gray-400">
+          <p>Test your knowledge and have fun!</p>
+        </p>
         </div>
-    )
-}
+        <Button className="home-page__start-button" onClick={handleNavigate}>Start Quiz</Button>
+      </Card>
+    </div>
+  );
+};
 
 export default HomePage;
-
 

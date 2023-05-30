@@ -27,3 +27,22 @@
     text-transform: none;
     text-shadow: none;
 }
+
+.SaveButton {
+    background-color: #140a9e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .RestartButton {
+    background-color: #140a9e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }

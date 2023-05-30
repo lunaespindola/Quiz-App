@@ -7,7 +7,7 @@
 
 from flask import Flask
 from flask_cors import CORS
-from mongoController import getQuestion, createUser, verifyUser, getTopScores
+from mongoController import getQuestion, createUser, verifyUser, getTopScores, addScore
 from flask import request
 from flask import jsonify
 from flask import Response
@@ -29,7 +29,7 @@ def question():
 @app.route('/api/getQuestions', methods=['POST'])
 def getQuestions():
     numQuestions = int(request.json['numQuestions']) 
-    randomList = random.sample(range(1, 4), numQuestions)
+    randomList = random.sample(range(1, 7), numQuestions)
     questions = []
     if numQuestions ==  1:
         questions.append(getQuestion(1))
@@ -55,6 +55,13 @@ def get_scores():
     print(scores)
     print("IM HERE")
     return jsonify(scores)
+
+@app.route('/api/Addscores', methods=['POST'])
+def add_score():
+    print(f'Username JJJJJJJJJJJJJJJ: {request.json}') 
+    score = {"Username": request.json['username'], "Score": request.json['score']}
+    addScore(score)
+    return "Score added", 201   
 
 
 

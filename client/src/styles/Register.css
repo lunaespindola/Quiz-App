@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .Register-Page{
-    background-color: #5056E5;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 85vh;
 }

@@ -22,29 +22,32 @@ const ScoresPages = () => {
 
   return (
     <div className="Score-Pages">
+      <div className="Score-Table">
       <Table hoverable={true}>
       <Table.Head>
-        <Table.HeadCell>Number</Table.HeadCell>
-        <Table.HeadCell>Username</Table.HeadCell>
-        <Table.HeadCell>Score</Table.HeadCell>
+        <Table.HeadCell style={{ fontSize: '25px' }}>Number</Table.HeadCell>
+        <Table.HeadCell style={{ fontSize: '25px' }}>Username</Table.HeadCell>
+        <Table.HeadCell style={{ fontSize: '25px' }}>Score</Table.HeadCell>
 
       </Table.Head>
       <Table.Body className="divide-y">
         {users.map((user, index) => (
           <Table.Row
             key={index}
+            style={{ fontSize: '25px' }}
             className="bg-white dark:border-gray-700 dark:bg-gray-800"
           >
-            <Table.Cell>{index + 1}</Table.Cell>
-            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            <Table.Cell style={{ fontSize: '25px' }}>{index + 1}</Table.Cell>
+            <Table.Cell style={{ fontSize: '25px' }} className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
               {user.Username}
-            </Table.Cell>
+            </Table.Cell >
             <Table.Cell>{user.Score}</Table.Cell>
 
           </Table.Row>
         ))}
       </Table.Body>
     </Table>
+    </div>
     </div>
 
   );

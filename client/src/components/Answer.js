@@ -2,21 +2,22 @@ import React from "react";
 import "../styles/Answer.css";
 
 const Answer = (props) => {
-  let answer = Object.keys(props.answer).map((qAnswer) => (
+  let answer = Object.keys(props.answer).map((i) => (
     <li
       className={
-        props.correctAnswer ===
+        props.correctAnswer === props.answer[i]
           ? "correct"
-          : props.clickedAnswer === qAnswer
+          : props.clickedAnswer === props.answer[i]
           ? "incorrect"
           : ""
       }
-      onClick={() => props.checkAnswer(qAnswer)}
-      key={qAnswer}
+      onClick={() => props.checkAnswer(props.answer[i])}  
+      key={props.answer[i]} 
     >
-      {props.answer[qAnswer]}
+      {props.answer[i]}
     </li>
   ));
+  
 
   return (
     <>
