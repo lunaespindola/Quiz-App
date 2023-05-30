@@ -106,6 +106,7 @@ export default class Quiz extends Component {
   saveQuiz = () => {
     const score = this.state.score;
     const username = localStorage.getItem("username");
+    localStorage.setItem("logged", false);
     axios
       .post("http://localhost:5000/api/Addscores", {
         username,
