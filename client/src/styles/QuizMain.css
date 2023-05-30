@@ -1,48 +1,71 @@
-.NextStep{
-    background-color: #140a9e;
-    color: white;
-    border-radius: 10px; 
-    padding: 10px 60px; 
-    display: block;
-    margin: 0 auto;
-    text-align: center;
+.NextStep {
+  background-color: #140a9e;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 60px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
 }
-.NextStep:hover{
-    background-color: rgb(33, 122, 224);
+.NextStep:hover {
+  background-color: rgb(33, 122, 224);
 }
-.NextStep[disabled]{
-    display: none;
+.NextStep[disabled] {
+  display: none;
 }
 
-.finalPage{
-    text-align: center;
+.finalPage {
+  text-align: center;
 }
-.finalPage h1{
-    text-align: center;
-    margin: 15px 0;
-    font-size: 25px;
-    font-family: Arial,sans-serif;
-    font-weight: bold;
-    color: #008416;
-    text-transform: none;
-    text-shadow: none;
+.finalPage h1 {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 25px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #008416;
+  text-transform: none;
+  text-shadow: none;
+}
+
+.finalPage p {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 25px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #000;
+  text-transform: none;
+  text-shadow: none;
 }
 
 .SaveButton {
-    background-color: #140a9e;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .RestartButton {
-    background-color: #140a9e;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
+  background-color: #140a9e;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  border-radius: 10px;
+  margin-right: 50px;
+}
+
+.SaveButton:hover {
+  background-color: rgb(33, 122, 224);
+}
+
+.RestartButton {
+  background-color: #140a9e;
+  color: white;
+  padding: 10px 40px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.RestartButton:hover {
+  background-color: rgb(33, 122, 224);
+}
