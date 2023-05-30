@@ -34,6 +34,7 @@ const RegisterPages = () => {
         else {
           localStorage.setItem("username", username);
           localStorage.setItem("numQuestions", numQuestions);
+          localStorage.setItem("logged", true);
         }
         navigate("/quiz", {
           replace: true,

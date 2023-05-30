@@ -19,40 +19,41 @@ export default class Quiz extends Component {
 
   componentDidMount() {
     const numQuestions = localStorage.getItem("numQuestions");
-    
 
-    axios
-      .post("http://localhost:5000/api/getQuestions", {
-        numQuestions,
-      })
-      .then(
-        (response) => {
-          console.log(response.data);
-          // Iterate over the array of responses and create an object with the question and the answers
-          for (let i = 0; i < response.data.length; i++) {
-            const question = response.data[i].Question;
-            const options = response.data[i].Options;
-            const answer = response.data[i].Answer;
-            this.setState((prevState) => ({
-              questions: {
-                ...prevState.questions,
-                [i + 1]: question,
-              },
-              options: {
-                ...prevState.options,
-                [i + 1]: options,
-              },
-              Answers: {
-                ...prevState.Answers,
-                [i + 1]: answer,
-              },
-            }));
+    if (localStorage.getItem("logged") === "true") {
+      axios
+        .post("http://localhost:5000/api/getQuestions", {
+          numQuestions,
+        })
+        .then(
+          (response) => {
+            console.log(response.data);
+            const { data } = response;
+            const updatedQuestions = {};
+            const updatedOptions = {};
+            const updatedAnswers = {};
+            for (let i = 0; i < data.length; i++) {
+              const question = data[i].Question;
+              const options = data[i].Options;
+              const answer = data[i].Answer;
+              updatedQuestions[i + 1] = question;
+              updatedOptions[i + 1] = options;
+              updatedAnswers[i + 1] = answer;
+            }
+            this.setState({
+              questions: updatedQuestions,
+              options: updatedOptions,
+              Answers: updatedAnswers,
+            });
+          },
+          (error) => {
+            console.log(error);
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
+    } else {
+      alert("You must be logged in to play the quiz");
+      window.location.href = "/register";
+    }
   }
 
   checkAnswer = (answer) => {
@@ -99,31 +100,30 @@ export default class Quiz extends Component {
       score: 0,
       isQuizCompleted: false,
     });
-    window.location.href = "/quiz"; // Redirect to the register page
+    window.location.href = "/quiz"; // Redirect to the quiz page
   };
 
   saveQuiz = () => {
     const score = this.state.score;
     const username = localStorage.getItem("username");
-    axios.post("http://localhost:5000/api/Addscores", {
-      username,
-      score,
-    }).then
-    ((response) => {
-      if (response.data === "User already exists") {
-        alert("User already exists");
-        return
-      }
-        else {
+    axios
+      .post("http://localhost:5000/api/Addscores", {
+        username,
+        score,
+      })
+      .then(
+        (response) => {
+          if (response.data === "User already exists") {
+            alert("User already exists");
+          } else {
+            window.location.href = "/scores"; // Redirect to the scores page
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-        window.location.href = "/home"; // Redirect to the register page
-
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+      );
+  };
 
   render() {
     const {
@@ -150,7 +150,7 @@ export default class Quiz extends Component {
             <button
               className="NextStep"
               disabled={!clickedAnswer}
-              onClick={() => this.nextStep(step)}
+              onClick={this.nextStep}
             >
               Next
             </button>
@@ -162,8 +162,10 @@ export default class Quiz extends Component {
               Your score is: {score} of {Object.keys(questions).length}
             </p>
             <p>Thank you!</p>
-            <button className="SaveButton" onClick={this.saveQuiz}>Save</button>
-            <button className="RestartButton" onClick={() => this.saveQuiz(localStorage.getItem("username"), score)}>
+            <button className="SaveButton" onClick={this.saveQuiz}>
+              Save
+            </button>
+            <button className="RestartButton" onClick={this.resetQuiz}>
               Restart
             </button>
           </div>

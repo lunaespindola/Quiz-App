@@ -29,7 +29,7 @@ def question():
 @app.route('/api/getQuestions', methods=['POST'])
 def getQuestions():
     numQuestions = int(request.json['numQuestions']) 
-    randomList = random.sample(range(1, 7), numQuestions)
+    randomList = random.sample(range(1,26), numQuestions)
     questions = []
     if numQuestions ==  1:
         questions.append(getQuestion(1))
