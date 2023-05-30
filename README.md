@@ -3,7 +3,8 @@
 This is a web app with Front-end services on React and Back-end services with Flask and MongoDB as database.
  
 ## General Overview
-
+The quizz app just as mention before is a web app with react on the Front-end and Flask with the Back-end. It is designed so people can take a quizz that can only be accessed if an user was created and registered before, this user is stored in a non-relational database, such as mongo. The questions of the quizz are stored in MongoDB as well.
+When entering the quizz app you are asked to login to take the quizz, therefore if you have an account you can access the quizz. The quizz takes random questions from the database and allows the user to view them and select the answers, if it is correct it will be marked in green, if it is incorrect it will mark the chosen answer in red and the correct one in green.
 
 ## Deployment
 
