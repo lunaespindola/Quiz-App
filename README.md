@@ -93,6 +93,39 @@ After running the client side of the app, on another CLI run on ./server
 | `username` | `string` | **Required**. Username to store on DB and show on Scores if it scores on top 10 |
 | `score` | `number` | **Required**. Number Scored on the quiz|
 
+## Deploying on EC2 and Atlas 
+For running our app we decided to host 2 EC2 since we had problems with multiple port listening.
+
+1. Firstly Create your aws EC2 instance and install nodejs, python and pip.
+2. Create your security rules that enable the ports 8080 and 3000 from anywhere
+3. Secondly Run both client and server codes 
+4. Add the ip address of the server to AtlasDB 
+
+Examples:
+- AWS EC2 Instance 
+ - OS: Amazon Linux
+ - Instance type: t2.medium
+
+![Instances](https://i.imgur.com/96wqGJp.png)
+
+- Security Group
+ -  Ports: 8080, 3000
+ -  Protocol: TCP
+ -  Origin: Anywhere
+
+![Security Group](https://i.imgur.com/19X6uu3.png)
+
+- Atlas adding IP
+
+![Adding IP to Atlas](https://i.imgur.com/MDgSBiV.png)
+
+- Running code on bash 
+![EC2 Server](https://i.imgur.com/2vOIsLb.png)
+![EC2 Client](https://i.imgur.com/lrcRkNT.png)
+
+## Example of it running
+[Video of Quiz App running](https://youtu.be/etqSkHOuSJ0)
+
 ## Authors
 
 - [@AlanGallegosEsp](https://github.com/AlanGallegosEsp)
