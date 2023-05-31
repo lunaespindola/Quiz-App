@@ -20,7 +20,7 @@ export default class Quiz extends Component {
     const numQuestions = localStorage.getItem("numQuestions");
 
     if (localStorage.getItem("logged") === "true") {
-      axios.post("http://localhost:5000/api/getQuestions", {
+      axios.post("http://35.174.138.142:5000/api/getQuestions", {
         numQuestions
         })
         .then(
@@ -106,7 +106,7 @@ export default class Quiz extends Component {
     const username = localStorage.getItem("username");
     localStorage.setItem("logged", false);
     axios
-      .post("http://localhost:5000/api/Addscores", {
+      .post("http://35.174.138.142:5000/api/Addscores", {
         username,
         score,
       })
