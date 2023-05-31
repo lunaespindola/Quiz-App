@@ -7,63 +7,52 @@
 
 from flask import Flask
 from flask_cors import CORS
-from mongoController import getQuestion, createUser, verifyUser, getTopScores, addScore
 from flask import request
 from flask import jsonify
-from flask import Response
 from datetime import datetime
 import random
-
+from Models.mongodbConnection import QuizApp
 
 app = Flask(__name__)
 CORS(app)
 
-
-@app.route('/question', methods=['GET', 'POST'])
-def question():
-    if request.method == 'POST':
-        id = int(request.json['id'])
-        questionJSON = getQuestion(id)
-        return jsonify(questionJSON)
+# Create an instance of the QuizApp class
+quiz_app = QuizApp()
 
 @app.route('/api/getQuestions', methods=['POST'])
 def getQuestions():
-    numQuestions = int(request.json['numQuestions']) 
-    randomList = random.sample(range(1,26), numQuestions)
+    numQuestions = int(request.json['numQuestions'])
+    randomList = random.sample(range(1, 26), numQuestions)
     questions = []
-    if numQuestions ==  1:
-        questions.append(getQuestion(1))
+    if numQuestions == 1:
+        questions.append(quiz_app.getQuestion(1))
         return jsonify(questions)
     else:
         for i in randomList:
-            questions.append(getQuestion(i))
+            questions.append(quiz_app.getQuestion(i))
         return jsonify(questions)
 
 @app.route('/api/users', methods=['POST'])
 def create_user():
-    user = {"Username": request.json['username'], "Number_of_questions": request.json['numQuestions'], "Time": datetime.now()}
-    res = verifyUser(user["Username"])
-    if res == None:
-        createUser(user)
+    user = {"Username": request.json['username'], "Number_of_questions": request.json['numQuestions'],
+            "Time": datetime.now()}
+    res = quiz_app.verifyUser(user["Username"])
+    if res is None:
+        quiz_app.createUser(user)
         return "User created", 201
     else:
-        return "User already exists" 
-    
+        return "User already exists"
+
 @app.route('/api/scores', methods=['GET'])
 def get_scores():
-    scores = list(getTopScores())
-    print(scores)
-    print("IM HERE")
+    scores = list(quiz_app.getTopScores())
     return jsonify(scores)
 
 @app.route('/api/Addscores', methods=['POST'])
 def add_score():
-    print(f'Username JJJJJJJJJJJJJJJ: {request.json}') 
     score = {"Username": request.json['username'], "Score": request.json['score']}
-    addScore(score)
-    return "Score added", 201   
-
-
+    quiz_app.addScore(score)
+    return "Score added", 201
 
 if __name__ == '__main__':
     app.run(debug=True)

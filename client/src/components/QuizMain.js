@@ -21,9 +21,8 @@ export default class Quiz extends Component {
     const numQuestions = localStorage.getItem("numQuestions");
 
     if (localStorage.getItem("logged") === "true") {
-      axios
-        .post("http://localhost:5000/api/getQuestions", {
-          numQuestions,
+      axios.post("http://localhost:5000/api/getQuestions", {
+        numQuestions
         })
         .then(
           (response) => {
