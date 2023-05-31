@@ -1,9 +1,10 @@
-"""
-    @Author: AlanGallegosEsp
-    @Author: PauAM10
-    @Date: 5/23/2023
-    @last update: 5/23/2023 10:24 PM
-"""
+# Final Project: Quiz Application with Microservices
+# Date: 30/05/2023
+# Authors:
+#          A01750624 Paulina Guadalupe Alva Martinez
+#          A01751117 Carlos Alan Gallegos Espinola
+#          A01378450 Jorge Alberto Penagos Mendez
+#          A01750363 Naomi Anciola Calderon 
 
 from flask import Flask
 from flask_cors import CORS
