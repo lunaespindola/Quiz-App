@@ -22,6 +22,15 @@ quiz_app = QuizApp()
 
 @app.route('/api/getQuestions', methods=['POST'])
 def getQuestions():
+    """ Method that returns a list of questions from the database
+
+    Args:
+        self (QuizApp): The instance of the class
+        numQuestions (int): The number of questions to be returned
+
+    Returns:
+        list: The list of questions that match the ids
+    """
     numQuestions = int(request.json['numQuestions'])
     randomList = random.sample(range(1, 26), numQuestions)
     questions = []
@@ -35,6 +44,15 @@ def getQuestions():
 
 @app.route('/api/users', methods=['POST'])
 def create_user():
+    """ Method that creates a new user in the database
+    
+    Args:
+        self (QuizApp): The instance of the class
+        user (dict): The user to be created
+        
+        Returns:
+            str: The message that indicates if the user was created or not        
+    """
     user = {"Username": request.json['username'], "Number_of_questions": request.json['numQuestions'],
             "Time": datetime.now()}
     res = quiz_app.verifyUser(user["Username"])
@@ -46,11 +64,28 @@ def create_user():
 
 @app.route('/api/scores', methods=['GET'])
 def get_scores():
+    """ Method that returns a list of the top 10 scores from the database
+
+    Args:
+        self (QuizApp): The instance of the class
+
+    Returns:
+        list: The list of top 10 scores
+    """
     scores = list(quiz_app.getTopScores())
     return jsonify(scores)
 
 @app.route('/api/Addscores', methods=['POST'])
 def add_score():
+    """ Method that adds a new score to the database
+
+    Args:
+        self (QuizApp): The instance of the class
+        score (dict): The score to be added
+
+    Returns:
+        str: The message that indicates if the score was added or not
+    """
     score = {"Username": request.json['username'], "Score": request.json['score']}
     quiz_app.addScore(score)
     return "Score added", 201

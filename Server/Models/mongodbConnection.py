@@ -12,6 +12,15 @@ import os
 
 class QuizApp:
     def __init__(self):
+        """Constructor that initializes the connection to the database
+        and the collections that will be used in the application
+
+        Args:
+            self (QuizApp): The instance of the class
+
+        Returns:
+            None
+        """
         current_directory = os.path.dirname(__file__)
         parent_directory = os.path.dirname(current_directory)
         file_path = os.path.join(parent_directory)
@@ -32,20 +41,64 @@ class QuizApp:
         self.s_collection = self.db['Scores']
 
     def getQuestion(self, question_id):
+        """ Method that returns a question from the database
+
+        Args:
+            self (QuizApp): The instance of the class
+            question_id (int): The id of the question to be returned
+
+        Returns:
+            dict: The question that matches the id
+        """
         filter = {'id': question_id}
         project = {'_id': 0}
         return self.q_collection.find_one(filter, project)
 
     def createUser(self, user):
+        """ Method that creates a new user in the database
+
+        Args:
+            self (QuizApp): The instance of the class
+            user (dict): The user to be created
+
+        Returns:
+            dict: The user that was created
+        """
         return self.u_collection.insert_one(user)
 
     def verifyUser(self, user):
+        """ Method that verifies if a user exists in the database
+
+        Args:
+            self (QuizApp): The instance of the class
+            user (dict): The user to be verified
+
+        Returns:
+            dict: The user that was verified
+        """
         filter = {'Username': user}
         project = {'_id': 0}
         return self.u_collection.find_one(filter, project)
 
     def getTopScores(self):
+        """ Method that returns the top 10 scores from the database
+
+        Args:
+            self (QuizApp): The instance of the class
+
+        Returns:
+            dict: The top 10 scores
+        """
         return self.s_collection.aggregate([{'$sort': {'Score': -1}}, {'$project': {'_id': 0}}, {'$limit': 10}])
 
     def addScore(self, score):
+        """ Method that adds a score to the database
+
+        Args:
+            self (QuizApp): The instance of the class
+            score (dict): The score to be added
+
+        Returns:
+            dict: The score that was added
+        """
         return self.s_collection.insert_one(score)
