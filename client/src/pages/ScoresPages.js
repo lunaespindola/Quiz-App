@@ -15,7 +15,7 @@ const ScoresPages = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://44.204.48.100:5000/api/scores").then(
+    axios.get("http://localhost:5000/api/scores").then(
       (response) => {
         console.log("ESTO: ", response.data);
         setUsers(response.data);
