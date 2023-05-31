@@ -4,7 +4,6 @@ import "../styles/QuizMain.css";
 import Question from "./Question";
 import Answer from "./Answer";
 
-
 export default class Quiz extends Component {
   state = {
     questions: {},
@@ -162,12 +161,14 @@ export default class Quiz extends Component {
               Your score is: {score} of {Object.keys(questions).length}
             </p>
             <p>Thank you!</p>
-            <button className="SaveButton" onClick={this.saveQuiz}>
-              Save
-            </button>
-            <button className="RestartButton" onClick={this.resetQuiz}>
-              Restart
-            </button>
+            <div className="buttons">
+              <button className="SaveButton" onClick={this.saveQuiz}>
+                Save
+              </button>
+              <button className="RestartButton" onClick={this.resetQuiz}>
+                Restart
+              </button>
+            </div>
           </div>
         )}
       </div>

@@ -59,7 +59,7 @@ const RegisterPages = () => {
     <form onSubmit={onRegister} className="flex flex-col gap-4">
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="username" value="Username" />
+          <Label htmlFor="username" value="Username" style={{ fontSize: '25px' }}/>
         </div>
         <TextInput
           type="text"
@@ -69,21 +69,27 @@ const RegisterPages = () => {
           onChange={onInputChange}
           required
           autoComplete="off"
+          style={{ fontSize: '25px' }}
         />
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="numQuestions" value="Num Questions (1 - 10)"/>
+          <Label htmlFor="numQuestions" value="Num Questions (1 - 10)" style={{ fontSize: '25px' }}/>
         </div>
-        <TextInput  type="number"
+        <TextInput  
+          type="number"
+          min="1"
+          max="10"
             name="numQuestions"
             id="numQuestions"
             value={numQuestions}
             onChange={onInputChange}
             required
-            autoComplete="off"/>
+            autoComplete="off"
+            style={{ fontSize: '25px' }}/>
+            
       </div>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" >Submit</Button>
     </form>
     </div>
   );
