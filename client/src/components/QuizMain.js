@@ -114,7 +114,7 @@ export default class Quiz extends Component {
     const username = localStorage.getItem("username");
     localStorage.setItem("logged", false);
     axios
-      .post("http:///api/Addscores", {
+      .post("http://100.26.101.193:8080/api/Addscores", {
         username,
         score,
       })
