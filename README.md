@@ -102,16 +102,16 @@ For running our app we decided to host 2 EC2 since we had problems with multiple
 4. Add the ip address of the server to AtlasDB 
 
 Examples:
-- AWS EC2 Instance 
- - OS: Amazon Linux
- - Instance type: t2.medium
+- AWS EC2 Instance:
+    -  OS: Amazon Linux
+    -  Instance type: t2.medium
 
 ![Instances](https://i.imgur.com/96wqGJp.png)
 
-- Security Group
- -  Ports: 8080, 3000
- -  Protocol: TCP
- -  Origin: Anywhere
+- Security Group:
+    -  Ports: 8080, 3000
+    -  Protocol: TCP
+    -  Origin: Anywhere
 
 ![Security Group](https://i.imgur.com/19X6uu3.png)
 
