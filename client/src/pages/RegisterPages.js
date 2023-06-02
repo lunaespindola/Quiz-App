@@ -30,7 +30,7 @@ const RegisterPages = () => {
 
   const onRegister = (e) => {
     e.preventDefault();
-    axios.post("http://100.26.101.193:8080/api/users", {
+    axios.post("http://3.80.157.132:8080/api/users", {
       username,
       numQuestions,
     }).then
