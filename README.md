@@ -128,7 +128,7 @@ Examples:
 
 ## Authors
 
-- [@AlanGallegosEsp](https://github.com/AlanGallegosEsp)
+- [@Lunaespindola](https://github.com/lunaespindola)
 - [@Paulina Alva](https://github.com/A01750624)
 - [@Jorge Penagos](https://github.com/A01378450)
 - [@Naomi](https://github.com/anciola)
